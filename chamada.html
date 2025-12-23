@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Chamada</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="chamada.css">
+</head>
+<body>
+
+    <div class="chamada">
+        <div class="topo">
+            <img src="foto.jpg" class="foto">
+            <h1>@codebn</h1>
+            <p>iphone</p>
+        </div>
+
+        <div class="botoes">
+            <div class="botao recusar" onclick="recusar()">
+                ❌
+                <span>Recusar</span>
+            </div>
+
+            <div class="botao atender" onclick="atender()">
+                📞
+                <span>Atender</span>
+            </div>
+        </div>
+    </div>
+
+    <audio id="audio" src="audio.mp3"></audio>
+
+    <script src="chamada.js"></script>
+</body>
+</html>

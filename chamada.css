@@ -1,0 +1,78 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background: black;
+    height: 100vh;
+    color: white;
+}
+
+.chamada {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 20px;
+}
+
+.topo {
+    text-align: center;
+}
+
+.foto {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    border: 3px solid #222;
+}
+
+.topo h1 {
+    font-size: 22px;
+}
+
+.topo p {
+    opacity: 0.6;
+}
+
+.botoes {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 40px;
+}
+
+.botao {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.botao span {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.recusar {
+    background: #c0392b;
+}
+
+.atender {
+    background: #27ae60;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
