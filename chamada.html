@@ -9,6 +9,7 @@
 <body>
 
 <div class="iphone vibrating" id="tela">
+
   <div class="topo">
     <p class="ligando">Chamada recebida</p>
     <h2 class="nome">@agente.codee</h2>
@@ -19,17 +20,25 @@
   <p class="status" id="status">iPhone</p>
   <p class="tempo" id="tempo">00:00</p>
 
+  <!-- INDICAÇÃO ARRASTAR -->
+  <div class="indicacao">
+    <p class="arraste-texto">Arraste para cima</p>
+    <div class="seta">⬆️</div>
+  </div>
+
+  <!-- BOTÕES -->
   <div class="botoes">
+
     <div class="botao recusar">
       <span>❌</span>
       <p>Recusar</p>
     </div>
 
+    <!-- BOTÃO SLIDER -->
     <div class="botao atender" id="slider">
-  <span class="icone">📞</span>
-  <p>Arraste para cima</p>
-  <div class="seta">⬆️</div>
-</div>
+      <span class="icone">📞</span>
+    </div>
+
   </div>
 </div>
 
@@ -38,4 +47,5 @@
 <script src="chamada.js"></script>
 </body>
 </html>
+
 
