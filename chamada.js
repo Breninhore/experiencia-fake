@@ -45,6 +45,9 @@ slider.addEventListener("touchmove", (e) => {
 slider.addEventListener("touchend", () => {
   if (slider.classList.contains("arrastando") && !atendida) {
     atender();
+  } else {
+    // se não atendeu, volta a indicação
+    indicacao.style.opacity = "1";
   }
 
   slider.classList.remove("arrastando");
@@ -81,4 +84,5 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
 
