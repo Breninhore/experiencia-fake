@@ -1,37 +1,30 @@
 const audio = document.getElementById("audio");
+const vibracaoAudio = document.getElementById("vibracao");
 const tempo = document.getElementById("tempo");
 const status = document.getElementById("status");
 const tela = document.getElementById("tela");
 const slider = document.getElementById("slider");
 const indicacao = document.querySelector(".indicacao");
-const vibracaoAudio = document.getElementById("vibracao");
-
-let audioLiberado = false;
-
-document.addEventListener("touchstart", () => {
-  if (!audioLiberado) {
-    vibracaoAudio.currentTime = 0;
-    vibracaoAudio.play().then(() => {
-      vibracaoAudio.pause();
-      vibracaoAudio.currentTime = 0;
-      audioLiberado = true;
-    }).catch(() => {});
-  }
-}, { once: true });
-
-vibracaoAudio.volume = 0.6; // ajuste fino depois
 
 let segundos = 0;
 let contador = null;
 let inicioY = null;
-let vibrando = false;
 let atendida = false;
-let somLiberado = false;
+let vibrando = false;
 
-/* ===== INICIAR VIBRAÇÃO APÓS LOAD ===== */
+/* ===============================
+   INICIAR VIBRAÇÃO AO ENTRAR
+================================ */
 window.addEventListener("load", () => {
+  vibracaoAudio.volume = 0.6;
+
+  // começa a vibrar + som
   vibrando = true;
   tela.classList.add("vibrating");
+
+  vibracaoAudio.currentTime = 0;
+  vibracaoAudio.play().catch(() => {});
+
   vibrar();
 });
 
@@ -41,15 +34,12 @@ function vibrar() {
   setTimeout(vibrar, 900);
 }
 
-/* ===== SLIDE PARA ATENDER ===== */
+/* ===============================
+   SLIDE PARA ATENDER
+================================ */
 slider.addEventListener("touchstart", (e) => {
   if (atendida) return;
-
   inicioY = e.touches[0].clientY;
-
-  // 🔊 COMEÇA O SOM DA VIBRAÇÃO AQUI
-  vibracaoAudio.currentTime = 0;
-  vibracaoAudio.play().catch(() => {});
 });
 
 slider.addEventListener("touchmove", (e) => {
@@ -68,7 +58,6 @@ slider.addEventListener("touchend", () => {
   if (slider.classList.contains("arrastando") && !atendida) {
     atender();
   } else {
-    // se não atendeu, volta a indicação
     indicacao.style.opacity = "1";
   }
 
@@ -76,27 +65,30 @@ slider.addEventListener("touchend", () => {
   inicioY = null;
 });
 
-/* ===== ATENDER CHAMADA ===== */
+/* ===============================
+   ATENDER CHAMADA
+================================ */
 function atender() {
-  if (atendida) return; // 🔒 trava total
+  if (atendida) return;
   atendida = true;
+
+  // PARA VIBRAÇÃO E SOM
   vibrando = false;
-
   vibracaoAudio.pause();
-vibracaoAudio.currentTime = 0;
-
+  vibracaoAudio.currentTime = 0;
   navigator.vibrate(0);
   tela.classList.remove("vibrating");
 
+  // UI
   indicacao.style.display = "none";
   status.style.display = "none";
   tempo.style.display = "block";
 
+  // INICIA ÁUDIO DA CHAMADA
   audio.currentTime = 0;
   audio.play();
 
-  if (contador) clearInterval(contador); // 🔒 segurança extra
-
+  // CONTADOR
   contador = setInterval(() => {
     segundos++;
     const min = String(Math.floor(segundos / 60)).padStart(2, "0");
@@ -108,19 +100,6 @@ vibracaoAudio.currentTime = 0;
     clearInterval(contador);
     tempo.innerText = "Encerrado";
   };
-}
-
-// ===== FUNÇÃO PARA INICIAR EXPERIÊNCIA (TELA ANTERIOR) =====
-function iniciarExperiencia() {
-  // libera o áudio com interação real do usuário
-  vibracaoAudio.currentTime = 0;
-  vibracaoAudio.play().catch(() => {});
-
-  // marca como liberado
-  audioLiberado = true;
-
-  // redireciona para a tela da chamada
-  window.location.href = "chamada.html";
 }
 
 
