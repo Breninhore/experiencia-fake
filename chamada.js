@@ -3,6 +3,7 @@ const tempo = document.getElementById("tempo");
 const status = document.getElementById("status");
 const tela = document.getElementById("tela");
 const slider = document.getElementById("slider");
+const indicacao = document.querySelector(".indicacao");
 
 let segundos = 0;
 let contador = null;
@@ -51,6 +52,8 @@ function atender() {
   atendida = true;
   vibrando = false;
 
+  indicacao.classList.add("hidden");
+
   navigator.vibrate(0);
   tela.classList.remove("vibrating");
 
@@ -71,4 +74,5 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
 
