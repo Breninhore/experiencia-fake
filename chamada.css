@@ -68,8 +68,7 @@ body {
 }
 
 .indicacao.hidden {
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
 }
 
 
@@ -168,6 +167,7 @@ body {
 #slider.arrastando {
   transform: translateY(-60px);
 }
+
 
 
 
