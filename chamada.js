@@ -3,17 +3,20 @@ const tempo = document.getElementById("tempo");
 const status = document.getElementById("status");
 const tela = document.getElementById("tela");
 const slider = document.getElementById("slider");
+const indicacao = document.querySelector(".indicacao");
 
 let segundos = 0;
 let contador = null;
 let inicioY = null;
-let vibrando = true;
+let vibrando = false;
 let atendida = false;
 
-/* ===== VIBRAÇÃO REAL DO CELULAR ===== */
-if (navigator.vibrate) {
+/* ===== INICIAR VIBRAÇÃO APÓS LOAD ===== */
+window.addEventListener("load", () => {
+  vibrando = true;
+  tela.classList.add("vibrating");
   vibrar();
-}
+});
 
 function vibrar() {
   if (!vibrando) return;
@@ -23,14 +26,15 @@ function vibrar() {
 
 /* ===== SLIDE PARA ATENDER ===== */
 slider.addEventListener("touchstart", (e) => {
+  if (atendida) return;
   inicioY = e.touches[0].clientY;
 });
 
 slider.addEventListener("touchmove", (e) => {
   if (!inicioY || atendida) return;
 
-  let atualY = e.touches[0].clientY;
-  let diferenca = inicioY - atualY;
+  const atualY = e.touches[0].clientY;
+  const diferenca = inicioY - atualY;
 
   if (diferenca > 40) {
     slider.classList.add("arrastando");
@@ -48,21 +52,26 @@ slider.addEventListener("touchend", () => {
 
 /* ===== ATENDER CHAMADA ===== */
 function atender() {
+  if (atendida) return; // 🔒 trava total
   atendida = true;
   vibrando = false;
 
   navigator.vibrate(0);
   tela.classList.remove("vibrating");
 
+  indicacao.style.display = "none";
   status.style.display = "none";
   tempo.style.display = "block";
 
+  audio.currentTime = 0;
   audio.play();
+
+  if (contador) clearInterval(contador); // 🔒 segurança extra
 
   contador = setInterval(() => {
     segundos++;
-    let min = String(Math.floor(segundos / 60)).padStart(2, "0");
-    let sec = String(segundos % 60).padStart(2, "0");
+    const min = String(Math.floor(segundos / 60)).padStart(2, "0");
+    const sec = String(segundos % 60).padStart(2, "0");
     tempo.innerText = `${min}:${sec}`;
   }, 1000);
 
@@ -71,4 +80,3 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
-
