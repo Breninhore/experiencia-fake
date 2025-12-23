@@ -13,7 +13,7 @@ if (navigator.vibrate) {
 
 function vibrar() {
   navigator.vibrate([500, 300]);
-  setTimeout(vibrar, 800);
+  setTimeout(vibrar, 900);
 }
 
 function atender() {
@@ -34,8 +34,6 @@ function atender() {
 
   audio.onended = () => {
     clearInterval(contador);
-    status.innerText = "Chamada encerrada";
-    status.style.display = "block";
-    tempo.style.display = "none";
+    tempo.innerText = "Encerrado";
   };
 }
