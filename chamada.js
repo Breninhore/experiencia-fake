@@ -1,27 +1,41 @@
-let vibrando = true;
-let audio = document.getElementById("audio");
+const audio = document.getElementById("audio");
+const tempo = document.getElementById("tempo");
+const status = document.getElementById("status");
+const tela = document.getElementById("tela");
 
-// Vibração contínua
+let segundos = 0;
+let contador;
+
+// vibração real do celular
 if (navigator.vibrate) {
-    vibrar();
+  vibrar();
 }
 
 function vibrar() {
-    if (!vibrando) return;
-    navigator.vibrate([500, 300, 500]);
-    setTimeout(vibrar, 1300);
+  navigator.vibrate([500, 300]);
+  setTimeout(vibrar, 800);
 }
 
-// Atender chamada
 function atender() {
-    vibrando = false;
-    navigator.vibrate(0);
-    audio.play();
-}
+  navigator.vibrate(0);
+  tela.classList.remove("vibrating");
 
-// Recusar (por enquanto só para)
-function recusar() {
-    vibrando = false;
-    navigator.vibrate(0);
-    alert("Chamada recusada");
+  status.style.display = "none";
+  tempo.style.display = "block";
+
+  audio.play();
+
+  contador = setInterval(() => {
+    segundos++;
+    let min = String(Math.floor(segundos / 60)).padStart(2, "0");
+    let sec = String(segundos % 60).padStart(2, "0");
+    tempo.innerText = `${min}:${sec}`;
+  }, 1000);
+
+  audio.onended = () => {
+    clearInterval(contador);
+    status.innerText = "Chamada encerrada";
+    status.style.display = "block";
+    tempo.style.display = "none";
+  };
 }
