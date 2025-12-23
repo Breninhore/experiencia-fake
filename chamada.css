@@ -9,7 +9,6 @@ body {
   background: black;
   height: 100vh;
   color: white;
-  overflow: hidden;
 }
 
 .iphone {
@@ -22,8 +21,6 @@ body {
   text-align: center;
 }
 
-/* ===== TOPO ===== */
-
 .topo .ligando {
   font-size: 14px;
   opacity: 0.7;
@@ -35,8 +32,6 @@ body {
   margin-top: 6px;
 }
 
-/* ===== FOTO ===== */
-
 .foto {
   width: 140px;
   height: 140px;
@@ -44,8 +39,6 @@ body {
   object-fit: cover;
   border: 3px solid #222;
 }
-
-/* ===== STATUS / TEMPO ===== */
 
 .status {
   opacity: 0.6;
@@ -56,48 +49,6 @@ body {
   font-size: 22px;
   letter-spacing: 1px;
 }
-
-/* ===== INDICAÇÃO ARRASTAR ===== */
-
-.indicacao {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 20px;
-  transition: opacity 0.3s ease;
-}
-
-.indicacao.hidden {
-  display: none !important;
-}
-
-
-.arraste-texto {
-  font-size: 14px;
-  opacity: 0.7;
-  animation: textoSubir 1.4s infinite;
-}
-
-.seta {
-  font-size: 20px;
-  margin-top: 6px;
-  animation: setaSubir 1.4s infinite;
-}
-
-/* animações texto + seta */
-@keyframes textoSubir {
-  0% { transform: translateY(10px); opacity: 0; }
-  50% { opacity: 0.7; }
-  100% { transform: translateY(-10px); opacity: 0; }
-}
-
-@keyframes setaSubir {
-  0% { transform: translateY(8px); opacity: 0; }
-  50% { opacity: 1; }
-  100% { transform: translateY(-8px); opacity: 0; }
-}
-
-/* ===== BOTÕES ===== */
 
 .botoes {
   width: 100%;
@@ -115,8 +66,7 @@ body {
   opacity: 0.4;
 }
 
-.botao span,
-.botao .icone {
+.botao span {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -126,28 +76,25 @@ body {
   font-size: 26px;
 }
 
-/* recusar (não funciona) */
 .recusar span {
   background: #ff3b30;
 }
 
-/* atender */
 .atender {
   opacity: 1;
   cursor: pointer;
 }
 
-.atender .icone {
+.atender span {
   background: #34c759;
 }
 
-/* ===== VIBRAÇÃO DA TELA ===== */
-
+/* vibração visual */
 .vibrating {
-  animation: vibrarTela 0.25s infinite;
+  animation: vibrar 0.25s infinite;
 }
 
-@keyframes vibrarTela {
+@keyframes vibrar {
   0% { transform: translateX(0); }
   25% { transform: translateX(-2px); }
   50% { transform: translateX(2px); }
@@ -155,18 +102,7 @@ body {
   100% { transform: translateX(0); }
 }
 
-/* ===== SLIDER ===== */
 
-#slider {
-  position: relative;
-  user-select: none;
-  transition: transform 0.2s ease;
-}
-
-/* quando arrasta */
-#slider.arrastando {
-  transform: translateY(-60px);
-}
 
 
 
