@@ -11,23 +11,30 @@ let contador = null;
 let inicioY = null;
 let atendida = false;
 let vibrando = false;
+let audioLiberado = false;
 
 /* ===============================
-   INICIAR VIBRAÇÃO AO ENTRAR
+   LIBERAR ÁUDIO NO PRIMEIRO TOQUE
 ================================ */
-window.addEventListener("load", () => {
+document.addEventListener("touchstart", () => {
+  if (audioLiberado) return;
+
   vibracaoAudio.volume = 0.6;
-
-  // começa a vibrar + som
-  vibrando = true;
-  tela.classList.add("vibrating");
-
   vibracaoAudio.currentTime = 0;
-  vibracaoAudio.play().catch(() => {});
 
-  vibrar();
-});
+  vibracaoAudio.play().then(() => {
+    // agora o navegador liberou áudio
+    audioLiberado = true;
 
+    vibrando = true;
+    tela.classList.add("vibrating");
+    vibrar();
+  }).catch(() => {});
+}, { once: true });
+
+/* ===============================
+   VIBRAÇÃO DO CELULAR
+================================ */
 function vibrar() {
   if (!vibrando) return;
   navigator.vibrate([500, 300]);
@@ -101,6 +108,7 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
