@@ -4,6 +4,7 @@ const status = document.getElementById("status");
 const tela = document.getElementById("tela");
 const slider = document.getElementById("slider");
 const indicacao = document.querySelector(".indicacao");
+const vibracaoAudio = document.getElementById("vibracao");
 
 let segundos = 0;
 let contador = null;
@@ -84,5 +85,6 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
