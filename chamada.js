@@ -36,8 +36,9 @@ slider.addEventListener("touchmove", (e) => {
   const atualY = e.touches[0].clientY;
   const diferenca = inicioY - atualY;
 
-  if (diferenca > 40) {
+  if (diferenca > 20) {
     slider.classList.add("arrastando");
+    indicacao.style.opacity = "0";
   }
 });
 
@@ -80,3 +81,4 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
