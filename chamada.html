@@ -1,35 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Chamada</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="chamada.css">
+  <meta charset="UTF-8">
+  <title>Chamada</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="chamada.css">
 </head>
 <body>
 
-    <div class="chamada">
-        <div class="topo">
-            <img src="foto.jpg" class="foto">
-            <h1>@codebn</h1>
-            <p>iphone</p>
-        </div>
+<div class="chamada vibrating" id="tela">
+  <img src="foto.jpg" class="foto">
 
-        <div class="botoes">
-            <div class="botao recusar" onclick="recusar()">
-                ❌
-                <span>Recusar</span>
-            </div>
+  <h2>@agente.codee</h2>
+  <p id="status">Chamada recebida…</p>
+  <p id="tempo">00:00</p>
 
-            <div class="botao atender" onclick="atender()">
-                📞
-                <span>Atender</span>
-            </div>
-        </div>
+  <div class="botoes">
+    <div class="botao fake">
+      ❌
+      <span>Recusar</span>
     </div>
 
-    <audio id="audio" src="audio.mp3"></audio>
+    <div class="botao atender" onclick="atender()">
+      📞
+      <span>Atender</span>
+    </div>
+  </div>
+</div>
 
-    <script src="chamada.js"></script>
+<audio id="audio" src="audio.mp3"></audio>
+
+<script src="chamada.js"></script>
 </body>
 </html>
