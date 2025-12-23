@@ -110,6 +110,21 @@ vibracaoAudio.currentTime = 0;
   };
 }
 
+// ===== FUNÇÃO PARA INICIAR EXPERIÊNCIA (TELA ANTERIOR) =====
+function iniciarExperiencia() {
+  // libera o áudio com interação real do usuário
+  vibracaoAudio.currentTime = 0;
+  vibracaoAudio.play().catch(() => {});
+
+  // marca como liberado
+  audioLiberado = true;
+
+  // redireciona para a tela da chamada
+  window.location.href = "chamada.html";
+}
+
+
+
 
 
 
