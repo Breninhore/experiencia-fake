@@ -2,51 +2,63 @@ const audio = document.getElementById("audio");
 const tempo = document.getElementById("tempo");
 const status = document.getElementById("status");
 const tela = document.getElementById("tela");
-const vibracaoAudio = document.getElementById("vibracao");
+const slider = document.getElementById("slider");
 
 let segundos = 0;
-let contador;
-let vibLiberado = false;
+let contador = null;
+let inicioY = null;
+let vibrando = true;
+let atendida = false;
 
-// ===== LIBERAR SOM NO PRIMEIRO TOQUE =====
-document.addEventListener("touchstart", () => {
-  if (!vibLiberado) {
-    vibracaoAudio.volume = 0.6;
-    vibracaoAudio.play().catch(() => {});
-    vibLiberado = true;
-  }
-}, { once: true });
-
-// ===== VIBRAÇÃO REAL DO CELULAR =====
+/* ===== VIBRAÇÃO REAL DO CELULAR ===== */
 if (navigator.vibrate) {
   vibrar();
 }
 
 function vibrar() {
+  if (!vibrando) return;
   navigator.vibrate([500, 300]);
   setTimeout(vibrar, 900);
 }
 
-// ===== ATENDER CHAMADA =====
+/* ===== SLIDE PARA ATENDER ===== */
+slider.addEventListener("touchstart", (e) => {
+  inicioY = e.touches[0].clientY;
+});
+
+slider.addEventListener("touchmove", (e) => {
+  if (!inicioY || atendida) return;
+
+  let atualY = e.touches[0].clientY;
+  let diferenca = inicioY - atualY;
+
+  if (diferenca > 40) {
+    slider.classList.add("arrastando");
+  }
+});
+
+slider.addEventListener("touchend", () => {
+  if (slider.classList.contains("arrastando") && !atendida) {
+    atender();
+  }
+
+  slider.classList.remove("arrastando");
+  inicioY = null;
+});
+
+/* ===== ATENDER CHAMADA ===== */
 function atender() {
-  // para vibração do celular
+  atendida = true;
+  vibrando = false;
+
   navigator.vibrate(0);
-
-  // para som da vibração
-  vibracaoAudio.pause();
-  vibracaoAudio.currentTime = 0;
-
-  // para vibração visual
   tela.classList.remove("vibrating");
 
-  // troca status por tempo
   status.style.display = "none";
   tempo.style.display = "block";
 
-  // toca áudio principal
   audio.play();
 
-  // contador
   contador = setInterval(() => {
     segundos++;
     let min = String(Math.floor(segundos / 60)).padStart(2, "0");
@@ -54,9 +66,9 @@ function atender() {
     tempo.innerText = `${min}:${sec}`;
   }, 1000);
 
-  // quando o áudio acabar
   audio.onended = () => {
     clearInterval(contador);
     tempo.innerText = "Encerrado";
   };
 }
+
