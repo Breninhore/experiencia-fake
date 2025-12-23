@@ -21,7 +21,7 @@ document.addEventListener("touchstart", () => {
     vibracaoAudio.play().catch(() => {});
     somLiberado = true;
   }
-}, { once: true });
+});
 
 /* ===== INICIAR VIBRAÇÃO APÓS LOAD ===== */
 window.addEventListener("load", () => {
@@ -99,6 +99,7 @@ vibracaoAudio.currentTime = 0;
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
