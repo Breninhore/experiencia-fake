@@ -64,7 +64,14 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
+  transition: opacity 0.3s ease;
 }
+
+.indicacao.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 
 .arraste-texto {
   font-size: 14px;
@@ -161,5 +168,6 @@ body {
 #slider.arrastando {
   transform: translateY(-60px);
 }
+
 
 
