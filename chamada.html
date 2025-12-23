@@ -8,22 +8,26 @@
 </head>
 <body>
 
-<div class="chamada vibrating" id="tela">
+<div class="iphone vibrating" id="tela">
+  <div class="topo">
+    <p class="ligando">Chamada recebida</p>
+    <h2 class="nome">@agente.codee</h2>
+  </div>
+
   <img src="foto.jpg" class="foto">
 
-  <h2>@agente.codee</h2>
-  <p id="status">Chamada recebida…</p>
-  <p id="tempo">00:00</p>
+  <p class="status" id="status">iPhone</p>
+  <p class="tempo" id="tempo">00:00</p>
 
   <div class="botoes">
-    <div class="botao fake">
-      ❌
-      <span>Recusar</span>
+    <div class="botao recusar">
+      <span>❌</span>
+      <p>Recusar</p>
     </div>
 
     <div class="botao atender" onclick="atender()">
-      📞
-      <span>Atender</span>
+      <span>📞</span>
+      <p>Atender</p>
     </div>
   </div>
 </div>
@@ -33,3 +37,4 @@
 <script src="chamada.js"></script>
 </body>
 </html>
+
