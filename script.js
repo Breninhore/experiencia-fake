@@ -1,3 +1,3 @@
 function irParaChamada() {
-    window.location.href = "chamada.html";
+  window.location.href = "chamada.html";
 }
