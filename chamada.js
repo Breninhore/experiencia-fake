@@ -6,6 +6,19 @@ const slider = document.getElementById("slider");
 const indicacao = document.querySelector(".indicacao");
 const vibracaoAudio = document.getElementById("vibracao");
 
+let audioLiberado = false;
+
+document.addEventListener("touchstart", () => {
+  if (!audioLiberado) {
+    vibracaoAudio.currentTime = 0;
+    vibracaoAudio.play().then(() => {
+      vibracaoAudio.pause();
+      vibracaoAudio.currentTime = 0;
+      audioLiberado = true;
+    }).catch(() => {});
+  }
+}, { once: true });
+
 vibracaoAudio.volume = 0.6; // ajuste fino depois
 
 let segundos = 0;
@@ -96,6 +109,7 @@ vibracaoAudio.currentTime = 0;
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
