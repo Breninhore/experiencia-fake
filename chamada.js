@@ -15,14 +15,6 @@ let vibrando = false;
 let atendida = false;
 let somLiberado = false;
 
-document.addEventListener("touchstart", () => {
-  if (!somLiberado && !atendida) {
-    vibracaoAudio.currentTime = 0;
-    vibracaoAudio.play().catch(() => {});
-    somLiberado = true;
-  }
-});
-
 /* ===== INICIAR VIBRAÇÃO APÓS LOAD ===== */
 window.addEventListener("load", () => {
   vibrando = true;
@@ -39,7 +31,12 @@ function vibrar() {
 /* ===== SLIDE PARA ATENDER ===== */
 slider.addEventListener("touchstart", (e) => {
   if (atendida) return;
+
   inicioY = e.touches[0].clientY;
+
+  // 🔊 COMEÇA O SOM DA VIBRAÇÃO AQUI
+  vibracaoAudio.currentTime = 0;
+  vibracaoAudio.play().catch(() => {});
 });
 
 slider.addEventListener("touchmove", (e) => {
@@ -99,6 +96,7 @@ vibracaoAudio.currentTime = 0;
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
