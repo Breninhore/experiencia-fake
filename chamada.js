@@ -13,6 +13,7 @@ let contador = null;
 let inicioY = null;
 let vibrando = false;
 let atendida = false;
+let somLiberado = false;
 
 document.addEventListener("touchstart", () => {
   if (!somLiberado && !atendida) {
@@ -98,6 +99,7 @@ vibracaoAudio.currentTime = 0;
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
