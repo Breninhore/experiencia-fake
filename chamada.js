@@ -6,11 +6,21 @@ const slider = document.getElementById("slider");
 const indicacao = document.querySelector(".indicacao");
 const vibracaoAudio = document.getElementById("vibracao");
 
+vibracaoAudio.volume = 0.6; // ajuste fino depois
+
 let segundos = 0;
 let contador = null;
 let inicioY = null;
 let vibrando = false;
 let atendida = false;
+
+document.addEventListener("touchstart", () => {
+  if (!somLiberado && !atendida) {
+    vibracaoAudio.currentTime = 0;
+    vibracaoAudio.play().catch(() => {});
+    somLiberado = true;
+  }
+}, { once: true });
 
 /* ===== INICIAR VIBRAÇÃO APÓS LOAD ===== */
 window.addEventListener("load", () => {
@@ -61,6 +71,9 @@ function atender() {
   atendida = true;
   vibrando = false;
 
+  vibracaoAudio.pause();
+vibracaoAudio.currentTime = 0;
+
   navigator.vibrate(0);
   tela.classList.remove("vibrating");
 
@@ -85,6 +98,7 @@ function atender() {
     tempo.innerText = "Encerrado";
   };
 }
+
 
 
 
